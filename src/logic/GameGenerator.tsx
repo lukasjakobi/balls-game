@@ -4,23 +4,42 @@ import GlassInterface from "../interfaces/GlassInterface";
 import generateColor from "./ColorGenerator";
 import BallColorInterface from "../interfaces/BallColorInterface";
 
+const MAX_BALLS_PER_GLASS = 4;
+
 interface PropsInterface {
     glasses: number;
     emptyGlasses: number;
 }
 
-const MAX_BALLS_PER_GLASS = 4;
-
 export default function generateGame(props: PropsInterface): GameInterface {
-    // prepare colors
+    // amount of glasses to fill & colors to generate
     let glassesToFill = props.glasses - props.emptyGlasses;
+
+    let colors: BallColorInterface[] = generateColors(glassesToFill);
+    let balls: BallInterface[] = generateBalls(colors);
+    let glasses: GlassInterface[] = generateGlasses(balls, props, glassesToFill);
+
+    return {
+        id: 1,
+        glasses: glasses,
+        balls: balls,
+        colors: colors,
+        steps: 0,
+        resets: 0
+    };
+}
+
+export function generateColors(amount: number): BallColorInterface[] {
     let colors: BallColorInterface[] = [];
 
-    for (let i = 0; i < glassesToFill; i++) {
+    for (let i = 0; i < amount; i++) {
         colors.push(generateColor());
     }
 
-    // prepare balls
+    return colors;
+}
+
+export function generateBalls(colors: BallColorInterface[]): BallInterface[] {
     let balls: BallInterface[] = [];
 
     // generate MAX_BALLS_PER_GLASS balls per color
@@ -33,11 +52,14 @@ export default function generateGame(props: PropsInterface): GameInterface {
         }
     })
 
-    // prepare glasses
+    return balls;
+}
+
+export function generateGlasses(balls: BallInterface[], props: PropsInterface, amount: number) {
     let glasses: GlassInterface[] = [];
 
     // generate full glasses with balls
-    for (let i = 0; i < glassesToFill; i++) {
+    for (let i = 0; i < amount; i++) {
         let currentBalls: BallInterface[] = [];
 
         for (let n = 0; n < MAX_BALLS_PER_GLASS; n++) {
@@ -65,12 +87,5 @@ export default function generateGame(props: PropsInterface): GameInterface {
         });
     }
 
-    return {
-        id: 1,
-        glasses: glasses,
-        balls: balls,
-        colors: colors,
-        steps: 0,
-        resets: 0
-    };
+    return glasses;
 }
