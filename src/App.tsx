@@ -1,24 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import generateGame from "./logic/GameGenerator";
+import GameInterface from "./interfaces/GameInterface";
+import Game from "./components/Game";
 
 function App() {
+  const game: GameInterface = generateGame({glasses: 4, emptyGlasses: 1})
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app w-screen h-screen flex bg-yellow-50">
+      <div className="my-auto mx-auto">
+        <Game
+            key={game.id}
+            id={game.id}
+            glasses={game.glasses}
+            balls={game.balls}
+            colors={game.colors}
+            steps={game.steps}
+            resets={game.resets}
+        />
+      </div>
     </div>
   );
 }
