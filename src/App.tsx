@@ -5,7 +5,7 @@ import GameInterface from "./interfaces/GameInterface";
 import Game from "./components/Game";
 
 function App() {
-  const game: GameInterface = generateGame({glasses: 4, emptyGlasses: 1})
+  const game: GameInterface = generateGame({glasses: 8, emptyGlasses: 2})
 
   return (
     <div className="app w-screen h-screen flex bg-yellow-50">

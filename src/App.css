@@ -9,19 +9,23 @@
 .ball {
     width: 3rem;
     height: 3rem;
-    margin: .5rem;
+    margin: .5rem auto;
     border-radius: 1rem;
+}
+
+.ball:first-child {
+    margin-top: auto;
 }
 
 .glass {
     margin: 0.2rem .5rem;
-    border: .2rem solid #333;
+    border: .3rem solid #222;
     display: flex;
     flex-direction: column;
     height: fit-content;
     width: fit-content;
     min-height: 262px;
-    min-width: 70px;
+    min-width: 75px;
     border-top: none;
     border-radius: 0 0 1rem 1rem;
 }

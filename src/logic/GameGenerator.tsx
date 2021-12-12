@@ -47,7 +47,8 @@ export function generateBalls(colors: BallColorInterface[]): BallInterface[] {
         for (let i = 0; i < MAX_BALLS_PER_GLASS; i++) {
             balls.push({
                 id: (key * MAX_BALLS_PER_GLASS) + i,
-                color: color
+                color: color,
+                active: false
             })
         }
     })
@@ -82,7 +83,7 @@ export function generateGlasses(balls: BallInterface[], props: PropsInterface, a
     // generate empty glasses
     for (let i = 0; i < props.emptyGlasses; i++) {
         glasses.push({
-            id: (props.glasses + i),
+            id: (props.glasses - 1 + i),
             balls: []
         });
     }
