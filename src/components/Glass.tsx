@@ -8,7 +8,7 @@ export default function Glass(props: GlassInterface) {
         >
             { props.balls && props.balls.map(ball => (
                 <Ball
-                    key={ball.id}
+                    key={"ball_" + ball.id}
                     id={ball.id}
                     color={ball.color}
                     active={ball.active}

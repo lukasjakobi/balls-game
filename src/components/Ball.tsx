@@ -4,7 +4,6 @@ export default function Ball(props: BallInterface) {
     return (
         <div
             className={"ball mt-auto"}
-            key={props.id}
             style={{backgroundColor: props.color.hex}}
         >
             {props.active && (

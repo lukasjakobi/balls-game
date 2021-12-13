@@ -3,29 +3,33 @@ import BallInterface from "../interfaces/BallInterface";
 import GlassInterface from "../interfaces/GlassInterface";
 import generateColor from "./ColorGenerator";
 import BallColorInterface from "../interfaces/BallColorInterface";
+import {getEmptyGlassAmount, getGlassAmount} from "./LevelManager";
 
 const MAX_BALLS_PER_GLASS = 4;
 
 interface PropsInterface {
-    glasses: number;
-    emptyGlasses: number;
+    level: number;
 }
 
 export default function generateGame(props: PropsInterface): GameInterface {
+    let glassAmount = getGlassAmount(props.level);
+    let emptyGlassAmount = getEmptyGlassAmount(props.level);
+
     // amount of glasses to fill & colors to generate
-    let glassesToFill = props.glasses - props.emptyGlasses;
+    let glassesToFill = glassAmount - emptyGlassAmount;
 
     let colors: BallColorInterface[] = generateColors(glassesToFill);
     let balls: BallInterface[] = generateBalls(colors);
-    let glasses: GlassInterface[] = generateGlasses(balls, props, glassesToFill);
+    let glasses: GlassInterface[] = generateGlasses(balls, glassAmount, emptyGlassAmount);
 
     return {
         id: 1,
+        level: props.level,
         glasses: glasses,
         balls: balls,
         colors: colors,
         steps: 0,
-        resets: 0
+        resets: 0,
     };
 }
 
@@ -56,11 +60,11 @@ export function generateBalls(colors: BallColorInterface[]): BallInterface[] {
     return balls;
 }
 
-export function generateGlasses(balls: BallInterface[], props: PropsInterface, amount: number) {
+export function generateGlasses(balls: BallInterface[], glassAmount: number, emptyGlassAmount: number) {
     let glasses: GlassInterface[] = [];
 
     // generate full glasses with balls
-    for (let i = 0; i < amount; i++) {
+    for (let i = 0; i < (glassAmount - emptyGlassAmount); i++) {
         let currentBalls: BallInterface[] = [];
 
         for (let n = 0; n < MAX_BALLS_PER_GLASS; n++) {
@@ -81,9 +85,9 @@ export function generateGlasses(balls: BallInterface[], props: PropsInterface, a
     }
 
     // generate empty glasses
-    for (let i = 0; i < props.emptyGlasses; i++) {
+    for (let i = 0; i < emptyGlassAmount; i++) {
         glasses.push({
-            id: (props.glasses - 1 + i),
+            id: ((glassAmount - emptyGlassAmount) + i),
             balls: []
         });
     }

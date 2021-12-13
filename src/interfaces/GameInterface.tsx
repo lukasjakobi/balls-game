@@ -4,6 +4,7 @@ import BallColorInterface from "./BallColorInterface";
 
 export default interface GameInterface {
     id: number;
+    level: number;
     balls: BallInterface[];
     colors: BallColorInterface[];
     glasses: GlassInterface[];
