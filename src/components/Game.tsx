@@ -6,7 +6,7 @@ import generateGame from "../logic/GameGenerator";
 
 export default function Game() {
     const [state, setState] = useState<number>(1);
-    const [game, setGame] = useState<GameInterface>(generateGame({level: 40}));
+    const [game, setGame] = useState<GameInterface>(generateGame({level: 1}));
 
     return (
       <div
