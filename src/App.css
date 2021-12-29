@@ -1,31 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* {
-    margin: 0;
-}
-
-.ball {
-    width: 3rem;
-    height: 3rem;
-    margin: .5rem auto;
-    border-radius: 1rem;
-}
-
-.ball:first-child {
-    margin-top: auto;
+body {
+    font-family: 'Inter', sans-serif;
 }
 
 .glass {
-    margin: 0.2rem .5rem;
-    border: .3rem solid #222;
-    display: flex;
-    flex-direction: column;
-    height: fit-content;
-    width: fit-content;
-    min-height: 262px;
-    min-width: 75px;
-    border-top: none;
-    border-radius: 0 0 1rem 1rem;
+    @apply h-44 w-full py-2 px-2 rounded-xl border-2 border-black border-t-0 rounded-t-none flex flex-col mb-2;
+}
+
+.ball {
+    @apply w-8 h-8 rounded-lg my-1 mx-auto;
+}
+
+.ball:first-child {
+    @apply mt-auto;
+}
+
+.header {
+    @apply w-full flex flex-row p-5 shadow-md bg-gray-800;
+}
+
+.button {
+    @apply w-16 h-8 rounded-md bg-white/[.1] text-white font-bold m-auto flex cursor-pointer;
 }

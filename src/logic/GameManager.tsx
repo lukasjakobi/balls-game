@@ -29,6 +29,12 @@ export function registerClick(game: GameInterface, glass: GlassInterface): void
             // don't activate new ball after win
             return;
         }
+
+        // if same glass is pressed as before, stop execution
+        if (activeGlass.id === glass.id) {
+            resetBalls(game.glasses);
+            return;
+        }
     }
 
     if (top === undefined) {

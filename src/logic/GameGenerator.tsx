@@ -1,9 +1,9 @@
 import GameInterface from "../interfaces/GameInterface";
 import BallInterface from "../interfaces/BallInterface";
 import GlassInterface from "../interfaces/GlassInterface";
-import generateColor from "./ColorGenerator";
 import BallColorInterface from "../interfaces/BallColorInterface";
 import {getEmptyGlassAmount, getGlassAmount} from "./LevelManager";
+import getColorsArray from "./ColorGenerator";
 
 const MAX_BALLS_PER_GLASS = 4;
 
@@ -18,7 +18,7 @@ export default function generateGame(props: PropsInterface): GameInterface {
     // amount of glasses to fill & colors to generate
     let glassesToFill = glassAmount - emptyGlassAmount;
 
-    let colors: BallColorInterface[] = generateColors(glassesToFill);
+    let colors: BallColorInterface[] = getColorsArray(glassesToFill);
     let balls: BallInterface[] = generateBalls(colors);
     let glasses: GlassInterface[] = generateGlasses(balls, glassAmount, emptyGlassAmount);
 
@@ -30,17 +30,8 @@ export default function generateGame(props: PropsInterface): GameInterface {
         colors: colors,
         steps: 0,
         resets: 0,
+        resetsMax: 5
     };
-}
-
-export function generateColors(amount: number): BallColorInterface[] {
-    let colors: BallColorInterface[] = [];
-
-    for (let i = 0; i < amount; i++) {
-        colors.push(generateColor());
-    }
-
-    return colors;
 }
 
 export function generateBalls(colors: BallColorInterface[]): BallInterface[] {

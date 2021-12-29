@@ -10,4 +10,5 @@ export default interface GameInterface {
     glasses: GlassInterface[];
     steps: number;
     resets: number;
+    resetsMax: number;
 }
