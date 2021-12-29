@@ -2,21 +2,20 @@ import GameInterface from "../interfaces/GameInterface";
 import Glass from "./Glass";
 import {useState} from "react";
 import generateGame from "../logic/GameGenerator";
-import {isGameWon, registerClick, resetGame, revertMove} from "../logic/GameManager";
-import {ArrowCircleLeftIcon, MenuIcon, RewindIcon, ViewGridAddIcon} from "@heroicons/react/solid";
+import {determineFirstGame, isGameWon, registerClick, resetGame, revertMove} from "../logic/GameManager";
+import {ArrowCircleLeftIcon, RewindIcon} from "@heroicons/react/solid";
 
 export default function Game() {
+    let loadedGame = determineFirstGame();
+
     const [state, setState] = useState<number>(1);
-    const [game, setGame] = useState<GameInterface>(generateGame({level: 40}));
+    const [game, setGame] = useState<GameInterface>(loadedGame);
 
     return (
       <div className="flex-col w-screen h-screen">
           <div className="header">
               {/* MENU BUTTON */}
               <div className="basis-1/4">
-                  <div className="button">
-                      <MenuIcon className="text-white w-5 h-5 m-auto" />
-                  </div>
               </div>
               {/* RESET BUTTON */}
               <div className="basis-1/4">
@@ -45,15 +44,12 @@ export default function Game() {
               </div>
               {/* ADD GLASS */}
               <div className="basis-1/4">
-                  <div className="button">
-                      <ViewGridAddIcon className="text-white w-5 h-5 m-auto" />
-                  </div>
               </div>
           </div>
           <div className="flex mt-6" id="level">
               <span className="text-xl text-gray-800 font-bold my-4 mx-auto">Level {game.level}</span>
           </div>
-          <div id="glasses" className="mx-auto w-3/4 grid grid-cols-4 gap-2 m-auto">
+          <div id="glasses" className="mx-auto w-4/5 grid grid-cols-5 gap-2 m-auto">
               { game.glasses && game.glasses.map(glass => (
                   <div
                       key={"c_" + glass.id}

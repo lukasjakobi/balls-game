@@ -5,7 +5,7 @@ import {BadgeCheckIcon} from '@heroicons/react/solid'
 export default function Ball(props: BallInterface) {
     return (
         <div
-            className={"ball mt-auto"}
+            className={"ball"}
             style={{backgroundColor: props.color.hex}}
         >
             {props.active && (

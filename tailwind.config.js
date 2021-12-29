@@ -5,3 +5,5 @@ module.exports = {
   },
   plugins: [],
 }
+
+// npx tailwindcss -i ./src/App.css -o ./public/style/tailwind.css --watch

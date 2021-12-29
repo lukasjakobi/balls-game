@@ -2,6 +2,7 @@ import BallInterface from "../interfaces/BallInterface";
 import GameInterface from "../interfaces/GameInterface";
 import GlassInterface from "../interfaces/GlassInterface";
 import MoveInterface from "../interfaces/MoveInterface";
+import generateGame from "./GameGenerator";
 
 export function registerClick(game: GameInterface, glass: GlassInterface): void
 {
@@ -32,6 +33,9 @@ export function registerClick(game: GameInterface, glass: GlassInterface): void
             }
 
             game.moves.push(move);
+
+            // write to local storage
+            localStorage.setItem('game_info', JSON.stringify(game));
 
             // don't activate new ball after successfully merging
             return;
@@ -71,11 +75,8 @@ export function revertMove(game: GameInterface) {
 }
 
 export function resetGame(game: GameInterface) {
-    console.log(game.moves);
-
     for (let i = game.moves.length - 1; i >= 0; i--) {
         let move: MoveInterface = game.moves[i];
-        console.log(i, move);
 
         if (move === undefined) {
             return;
@@ -158,7 +159,9 @@ function canBeMerged(from: BallInterface, to: BallInterface|undefined, sizeTo: n
         return true;
     }
 
-    return from.color === to.color;
+    return from.color.red === to.color.red
+        && from.color.green === to.color.green
+        && from.color.blue === to.color.blue;
 }
 
 function resetBalls(glasses: GlassInterface[])
@@ -195,7 +198,11 @@ export function isGameWon(game: GameInterface): boolean
                 continue;
             }
 
-            if (color !== ball.color) {
+            if (
+                color.red !== ball.color.red
+                || color.green !== ball.color.green
+                || color.blue !== ball.color.blue
+            ) {
                 return false;
             }
         }
@@ -206,4 +213,15 @@ export function isGameWon(game: GameInterface): boolean
     }
 
     return true;
+}
+
+export function determineFirstGame(): GameInterface
+{
+    let localGame = localStorage.getItem('game_info');
+
+    if (localGame !== null) {
+        return JSON.parse(localGame);
+    }
+
+    return generateGame({level: 1})
 }

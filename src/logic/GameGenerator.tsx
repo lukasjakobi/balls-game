@@ -22,7 +22,7 @@ export default function generateGame(props: PropsInterface): GameInterface {
     let balls: BallInterface[] = generateBalls(colors);
     let glasses: GlassInterface[] = generateGlasses(balls, glassAmount, emptyGlassAmount);
 
-    return {
+    let game: GameInterface = {
         id: 1,
         level: props.level,
         glasses: glasses,
@@ -32,6 +32,11 @@ export default function generateGame(props: PropsInterface): GameInterface {
         resets: 0,
         resetsMax: 5
     };
+
+    // write to local storage
+    localStorage.setItem('game_info', JSON.stringify(game));
+
+    return game;
 }
 
 export function generateBalls(colors: BallColorInterface[]): BallInterface[] {
