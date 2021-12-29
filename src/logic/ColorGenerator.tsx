@@ -26,7 +26,6 @@ export function generateColor(red: number, green: number, blue: number): BallCol
 export default function getColorsArray(length: number)
 {
     let colors: BallColorInterface[] = [
-        COLOR_RED,
         COLOR_ORANGE,
         COLOR_YELLOW,
         COLOR_GREEN_YELLOW,

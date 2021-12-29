@@ -2,7 +2,7 @@ import GameInterface from "../interfaces/GameInterface";
 import Glass from "./Glass";
 import {useState} from "react";
 import generateGame from "../logic/GameGenerator";
-import {isGameWon, registerClick, revertMove} from "../logic/GameManager";
+import {isGameWon, registerClick, resetGame, revertMove} from "../logic/GameManager";
 import {ArrowCircleLeftIcon, MenuIcon, RewindIcon, ViewGridAddIcon} from "@heroicons/react/solid";
 
 export default function Game() {
@@ -20,7 +20,10 @@ export default function Game() {
               </div>
               {/* RESET BUTTON */}
               <div className="basis-1/4">
-                  <div className="button">
+                  <div className="button" onClick={() => {
+                      resetGame(game);
+                      setState(state+1);
+                  }}>
                       <RewindIcon className="text-white w-5 h-5 m-auto" />
                   </div>
               </div>

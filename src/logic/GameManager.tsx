@@ -33,7 +33,7 @@ export function registerClick(game: GameInterface, glass: GlassInterface): void
 
             game.moves.push(move);
 
-            // don't activate new ball after win
+            // don't activate new ball after successfully merging
             return;
         }
 
@@ -68,6 +68,29 @@ export function revertMove(game: GameInterface) {
     to.balls.splice(0, 1);
 
     game.moves.splice(game.moves.length - 1, 1);
+}
+
+export function resetGame(game: GameInterface) {
+    console.log(game.moves);
+
+    for (let i = game.moves.length - 1; i >= 0; i--) {
+        let move: MoveInterface = game.moves[i];
+        console.log(i, move);
+
+        if (move === undefined) {
+            return;
+        }
+
+        let from: GlassInterface = game.glasses[move.from.id];
+        let to: GlassInterface = game.glasses[move.to.id];
+
+        from.balls.unshift(move.ball);
+        to.balls.splice(0, 1);
+
+        game.moves.splice(i, 1);
+    }
+
+    game.resets = 0;
 }
 
 function isAlreadyActive(glasses: GlassInterface[]): boolean
