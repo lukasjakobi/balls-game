@@ -28,7 +28,7 @@ export default function generateGame(props: PropsInterface): GameInterface {
         glasses: glasses,
         balls: balls,
         colors: colors,
-        steps: 0,
+        moves: [],
         resets: 0,
         resetsMax: 5
     };

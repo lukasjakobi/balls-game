@@ -2,8 +2,8 @@ import GameInterface from "../interfaces/GameInterface";
 import Glass from "./Glass";
 import {useState} from "react";
 import generateGame from "../logic/GameGenerator";
-import Header from "./Header";
-import {isGameWon, registerClick} from "../logic/GameManager";
+import {isGameWon, registerClick, revertMove} from "../logic/GameManager";
+import {ArrowCircleLeftIcon, MenuIcon, RewindIcon, ViewGridAddIcon} from "@heroicons/react/solid";
 
 export default function Game() {
     const [state, setState] = useState<number>(1);
@@ -11,10 +11,42 @@ export default function Game() {
 
     return (
       <div className="flex-col w-screen h-screen">
-          <Header
-              resetsMax={game.resetsMax}
-              resets={game.resets}
-          />
+          <div className="header">
+              {/* MENU BUTTON */}
+              <div className="basis-1/4">
+                  <div className="button">
+                      <MenuIcon className="text-white w-5 h-5 m-auto" />
+                  </div>
+              </div>
+              {/* RESET BUTTON */}
+              <div className="basis-1/4">
+                  <div className="button">
+                      <RewindIcon className="text-white w-5 h-5 m-auto" />
+                  </div>
+              </div>
+              {/* UNDO BUTTON */}
+              <div className="basis-1/4">
+                  <div className="button" id="btn_retries" onClick={() => {
+                      if (game.resets >= game.resetsMax || !game.moves.length) {
+                          return;
+                      }
+
+                      revertMove(game);
+
+                      game.resets ++;
+                      setState(state+1);
+                  }}>
+                      <ArrowCircleLeftIcon className="text-white w-5 h-5 m-auto mr-0" />
+                      <span className="m-auto ml-1 text-lg">{game.resetsMax - game.resets}</span>
+                  </div>
+              </div>
+              {/* ADD GLASS */}
+              <div className="basis-1/4">
+                  <div className="button">
+                      <ViewGridAddIcon className="text-white w-5 h-5 m-auto" />
+                  </div>
+              </div>
+          </div>
           <div className="flex mt-6" id="level">
               <span className="text-xl text-gray-800 font-bold my-4 mx-auto">Level {game.level}</span>
           </div>

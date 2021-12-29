@@ -1,6 +1,7 @@
 import BallInterface from "../interfaces/BallInterface";
 import GameInterface from "../interfaces/GameInterface";
 import GlassInterface from "../interfaces/GlassInterface";
+import MoveInterface from "../interfaces/MoveInterface";
 
 export function registerClick(game: GameInterface, glass: GlassInterface): void
 {
@@ -17,14 +18,20 @@ export function registerClick(game: GameInterface, glass: GlassInterface): void
 
         // check if active ball can be put on current top ball
         if (canBeMerged(activeBall, top, balls.length)) {
-            // add step
-            game.steps++;
-
             activeBall.active = false;
 
             // remove ball from old glass and add to new glass
             balls.unshift(activeBall);
             activeGlass.balls.splice(0, 1);
+
+            // record move
+            let move: MoveInterface = {
+                ball: activeBall,
+                from: activeGlass,
+                to: glass
+            }
+
+            game.moves.push(move);
 
             // don't activate new ball after win
             return;
@@ -45,6 +52,22 @@ export function registerClick(game: GameInterface, glass: GlassInterface): void
 
     // toggle state of top ball
     top.active = true;
+}
+
+export function revertMove(game: GameInterface) {
+    let move: MoveInterface = game.moves[game.moves.length - 1];
+
+    if (move === undefined) {
+        return;
+    }
+
+    let from: GlassInterface = game.glasses[move.from.id];
+    let to: GlassInterface = game.glasses[move.to.id];
+
+    from.balls.unshift(move.ball);
+    to.balls.splice(0, 1);
+
+    game.moves.splice(game.moves.length - 1, 1);
 }
 
 function isAlreadyActive(glasses: GlassInterface[]): boolean

@@ -1,6 +1,7 @@
 import GlassInterface from "./GlassInterface";
 import BallInterface from "./BallInterface";
 import BallColorInterface from "./BallColorInterface";
+import MoveInterface from "./MoveInterface";
 
 export default interface GameInterface {
     id: number;
@@ -8,7 +9,7 @@ export default interface GameInterface {
     balls: BallInterface[];
     colors: BallColorInterface[];
     glasses: GlassInterface[];
-    steps: number;
+    moves: MoveInterface[];
     resets: number;
     resetsMax: number;
 }
