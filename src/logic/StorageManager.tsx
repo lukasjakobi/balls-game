@@ -29,5 +29,5 @@ export function determineFirstGame(): GameInterface
         return localGame;
     }
 
-    return generateGame({level: 100})
+    return generateGame({level: 1})
 }
