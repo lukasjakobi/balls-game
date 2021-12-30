@@ -6,6 +6,8 @@ export function generateBalls(colors: BallColorInterface[]): BallInterface[]
 {
     let balls: BallInterface[] = [];
 
+    console.log(colors);
+
     // generate MAX_BALLS_PER_GLASS balls per color
     colors.forEach((color, key) => {
         for (let i = 0; i < MAX_BALLS_PER_GLASS; i++) {

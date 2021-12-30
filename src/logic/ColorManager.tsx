@@ -25,6 +25,7 @@ export function generateColor(red: number, green: number, blue: number): BallCol
 
 export default function getColors(length: number): BallColorInterface[]
 {
+    console.log(length);
     let all: BallColorInterface[] = [
         COLOR_RED,
         COLOR_ORANGE,
@@ -43,8 +44,8 @@ export default function getColors(length: number): BallColorInterface[]
     let colors: BallColorInterface[] = [];
 
     for (let i = 0; i < length; i++) {
-        colors.push(all[i]);
-        all.splice(i, 1);
+        colors.push(all[0]);
+        all.splice(0, 1);
     }
 
     return colors;

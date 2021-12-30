@@ -3,6 +3,7 @@ import './App.css';
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import Play from "./pages/Play";
+import Share from "./pages/Share";
 
 function App() {
     return (
@@ -10,6 +11,7 @@ function App() {
             <Routes>
                 <Route path="/" key="homepage" element={<Homepage />}/>
                 <Route path="play" key="homepage" element={<Play />}/>
+                <Route path="share/:hash" key="homepage" element={<Share />}/>
             </Routes>
         </div>
     );

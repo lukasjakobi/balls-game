@@ -4,7 +4,7 @@ import GlassInterface from "../interfaces/GlassInterface";
 import MoveInterface from "../interfaces/MoveInterface";
 import {saveGameInformation} from "./StorageManager";
 
-export function registerClick(game: GameInterface, glass: GlassInterface): void
+export function registerClick(game: GameInterface, glass: GlassInterface, share: boolean): void
 {
     let balls = glass.balls;
     let top: BallInterface = balls[0];
@@ -34,8 +34,10 @@ export function registerClick(game: GameInterface, glass: GlassInterface): void
 
             game.moves.push(move);
 
-            // write to local storage
-            saveGameInformation(game);
+            if (!share) {
+                // write to local storage
+                saveGameInformation(game);
+            }
 
             // don't activate new ball after successfully merging
             return;
