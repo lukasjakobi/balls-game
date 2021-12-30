@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {isGameWon, registerClick, resetGame, revertMove} from "../logic/GameManager";
 import {ArrowCircleLeftIcon, RefreshIcon, HomeIcon, ShareIcon} from "@heroicons/react/solid";
 import {determineFirstGame} from "../logic/StorageManager";
-import generateGame from "../logic/GameGenerator";
+import generateGameByLevel from "../logic/GameGenerator";
 import {generateUUID} from "../logic/UUIDGenerator";
 import ShareInterface from "../interfaces/ShareInterface";
 
@@ -84,7 +84,7 @@ export default function Game() {
                           registerClick(game, glass, false);
 
                           if (isGameWon(game)) {
-                              setGame(generateGame({level: game.level+1}))
+                              setGame(generateGameByLevel(game.level+1))
                               navigate('/');
                           }
 

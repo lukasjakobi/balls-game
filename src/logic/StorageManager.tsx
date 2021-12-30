@@ -1,5 +1,5 @@
 import GameInterface from "../interfaces/GameInterface";
-import generateGame from "./GameGenerator";
+import generateGameByLevel from "./GameGenerator";
 
 const KEY_LOCAL_STORAGE_GAME_INFORMATION = 'game_info';
 
@@ -29,5 +29,5 @@ export function determineFirstGame(): GameInterface
         return localGame;
     }
 
-    return generateGame({level: 1})
+    return generateGameByLevel(1);
 }

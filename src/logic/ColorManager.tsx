@@ -1,17 +1,34 @@
 import BallColorInterface from "../interfaces/BallColorInterface";
 
-const COLOR_RED: BallColorInterface = generateColor(255, 0, 0);
-const COLOR_ORANGE: BallColorInterface = generateColor(255, 127, 0);
-const COLOR_YELLOW: BallColorInterface = generateColor(249, 215, 10);
-const COLOR_GREEN_YELLOW: BallColorInterface = generateColor(127, 255, 0);
-const COLOR_GREEN: BallColorInterface = generateColor(5, 160, 2);
-const COLOR_GREEN_CYAN: BallColorInterface = generateColor(10, 250, 180);
-const COLOR_CYAN: BallColorInterface = generateColor(0, 255, 255);
-const COLOR_BLUE_CYAN: BallColorInterface = generateColor(0, 127, 255);
-const COLOR_BLUE: BallColorInterface = generateColor(0, 0, 255);
-const COLOR_BLUE_MAGENTA: BallColorInterface = generateColor(127, 0, 255);
-const COLOR_MAGENTA: BallColorInterface = generateColor(255, 0, 255);
-const COLOR_RED_MAGENTA: BallColorInterface = generateColor(187, 0, 127);
+const COLOR_1: BallColorInterface = generateColor(72, 52, 212);
+const COLOR_2: BallColorInterface = generateColor(242, 38, 38);
+const COLOR_3: BallColorInterface = generateColor(76, 209, 55);
+const COLOR_4: BallColorInterface = generateColor(179, 57, 57);
+const COLOR_5: BallColorInterface = generateColor(0, 168, 255);
+const COLOR_6: BallColorInterface = generateColor(251, 197, 49);
+const COLOR_7: BallColorInterface = generateColor(19, 15, 64);
+const COLOR_8: BallColorInterface = generateColor(255, 62, 212);
+const COLOR_9: BallColorInterface = generateColor(165, 94, 234);
+const COLOR_10: BallColorInterface = generateColor(255, 250, 101);
+const COLOR_11: BallColorInterface = generateColor(34, 166, 179);
+const COLOR_12: BallColorInterface = generateColor(255, 255, 255);
+const COLOR_13: BallColorInterface = generateColor(0, 0, 0);
+
+const COLORS: BallColorInterface[] = [
+    COLOR_1,
+    COLOR_2,
+    COLOR_3,
+    COLOR_4,
+    COLOR_5,
+    COLOR_6,
+    COLOR_7,
+    COLOR_8,
+    COLOR_9,
+    COLOR_10,
+    COLOR_11,
+    COLOR_12,
+    COLOR_13,
+]
 
 export function generateColor(red: number, green: number, blue: number): BallColorInterface
 {
@@ -25,30 +42,7 @@ export function generateColor(red: number, green: number, blue: number): BallCol
 
 export default function getColors(length: number): BallColorInterface[]
 {
-    console.log(length);
-    let all: BallColorInterface[] = [
-        COLOR_RED,
-        COLOR_ORANGE,
-        COLOR_BLUE,
-        COLOR_GREEN,
-        COLOR_YELLOW,
-        COLOR_GREEN_YELLOW,
-        COLOR_CYAN,
-        COLOR_BLUE_CYAN,
-        COLOR_GREEN_CYAN,
-        COLOR_MAGENTA,
-        COLOR_RED_MAGENTA,
-        COLOR_BLUE_MAGENTA,
-    ]
-
-    let colors: BallColorInterface[] = [];
-
-    for (let i = 0; i < length; i++) {
-        colors.push(all[0]);
-        all.splice(0, 1);
-    }
-
-    return colors;
+    return COLORS.slice(0, length);
 }
 
 export function rgbToHex(red: number, green: number, blue: number): string

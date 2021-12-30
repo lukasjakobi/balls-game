@@ -16,9 +16,13 @@ export function getGlassAmount(level: number): number
         return 11;
     } else if (level > 80 && level <= 100) {
         return 12;
+    } else if (level > 100 && level <= 125) {
+        return 13;
+    } else if (level > 125 && level <= 175) {
+        return 14;
     }
 
-    return 14;
+    return 15;
 }
 
 export function getEmptyGlassAmount(): number
