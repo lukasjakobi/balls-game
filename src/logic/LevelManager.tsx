@@ -21,7 +21,7 @@ export function getGlassAmount(level: number): number
     return 14;
 }
 
-export function getEmptyGlassAmount(level: number): number
+export function getEmptyGlassAmount(): number
 {
     return 2;
 }

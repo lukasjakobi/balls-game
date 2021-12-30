@@ -1,12 +1,16 @@
 import GameInterface from "../interfaces/GameInterface";
 import Glass from "./Glass";
 import {useState} from "react";
-import generateGame from "../logic/GameGenerator";
-import {determineFirstGame, isGameWon, registerClick, resetGame, revertMove} from "../logic/GameManager";
+import {useNavigate} from "react-router-dom";
+import {isGameWon, registerClick, resetGame, revertMove} from "../logic/GameManager";
 import {ArrowCircleLeftIcon, RewindIcon} from "@heroicons/react/solid";
+import {determineFirstGame} from "../logic/StorageManager";
+import generateGame from "../logic/GameGenerator";
 
 export default function Game() {
     let loadedGame = determineFirstGame();
+
+    let navigate = useNavigate();
 
     const [state, setState] = useState<number>(1);
     const [game, setGame] = useState<GameInterface>(loadedGame);
@@ -58,6 +62,7 @@ export default function Game() {
 
                           if (isGameWon(game)) {
                               setGame(generateGame({level: game.level+1}))
+                              navigate('/');
                           }
 
                           setState(state+1);

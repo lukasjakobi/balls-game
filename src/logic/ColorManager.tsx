@@ -23,36 +23,34 @@ export function generateColor(red: number, green: number, blue: number): BallCol
     }
 }
 
-export default function getColorsArray(length: number)
+export default function getColors(length: number): BallColorInterface[]
 {
-    let colors: BallColorInterface[] = [
+    let all: BallColorInterface[] = [
+        COLOR_RED,
         COLOR_ORANGE,
+        COLOR_BLUE,
+        COLOR_GREEN,
         COLOR_YELLOW,
         COLOR_GREEN_YELLOW,
-        COLOR_GREEN,
-        COLOR_GREEN_CYAN,
         COLOR_CYAN,
         COLOR_BLUE_CYAN,
-        COLOR_BLUE,
-        COLOR_BLUE_MAGENTA,
+        COLOR_GREEN_CYAN,
         COLOR_MAGENTA,
-        COLOR_RED,
         COLOR_RED_MAGENTA,
+        COLOR_BLUE_MAGENTA,
     ]
 
-    let random: BallColorInterface[] = [];
+    let colors: BallColorInterface[] = [];
 
-    for (let i = 0; i < length; i ++) {
-        let randomNumber = Math.floor(Math.random() * colors.length);
-
-        random.push(colors[randomNumber]);
-        colors.splice(randomNumber, 1);
+    for (let i = 0; i < length; i++) {
+        colors.push(all[i]);
+        all.splice(i, 1);
     }
 
-    return random;
+    return colors;
 }
 
-function rgbToHex(red: number, green: number, blue: number): string
+export function rgbToHex(red: number, green: number, blue: number): string
 {
     return "#" + ((1 << 24) + (red << 16) + (green << 8) + blue).toString(16).slice(1);
 }

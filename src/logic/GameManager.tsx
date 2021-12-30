@@ -2,7 +2,7 @@ import BallInterface from "../interfaces/BallInterface";
 import GameInterface from "../interfaces/GameInterface";
 import GlassInterface from "../interfaces/GlassInterface";
 import MoveInterface from "../interfaces/MoveInterface";
-import generateGame from "./GameGenerator";
+import {saveGameInformation} from "./StorageManager";
 
 export function registerClick(game: GameInterface, glass: GlassInterface): void
 {
@@ -35,7 +35,7 @@ export function registerClick(game: GameInterface, glass: GlassInterface): void
             game.moves.push(move);
 
             // write to local storage
-            localStorage.setItem('game_info', JSON.stringify(game));
+            saveGameInformation(game);
 
             // don't activate new ball after successfully merging
             return;
@@ -213,15 +213,4 @@ export function isGameWon(game: GameInterface): boolean
     }
 
     return true;
-}
-
-export function determineFirstGame(): GameInterface
-{
-    let localGame = localStorage.getItem('game_info');
-
-    if (localGame !== null) {
-        return JSON.parse(localGame);
-    }
-
-    return generateGame({level: 1})
 }
